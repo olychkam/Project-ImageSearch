@@ -1,0 +1,34 @@
+
+.imageSearchContainer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-height: 100vh;
+  margin: 10px;
+}
+
+.input {
+  margin-bottom: 10px;
+}
+
+.photos {
+  display: flex;
+  //flex-direction: row ;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  align-content: center;
+}
+.container1{
+  display:flex;
+  width: 100%;
+  flexGrow: 1;
+  margin:auto
+}
+.item {
+  padding:20px;
+  xs:12
+}
+.itemFlexGrow {
+  flexGrow: 1;
+  border: 1px solid red
+}

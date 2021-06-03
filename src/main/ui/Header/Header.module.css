@@ -1,0 +1,16 @@
+.toolbar{
+  display:flex;
+  justifyContent:space-between;
+  width:100%;
+  paddingLeft:30px
+}
+.app{
+  background: #56595a;
+}
+.title{
+  color:white;
+  font-family: Gabriola;
+}
+
+
+

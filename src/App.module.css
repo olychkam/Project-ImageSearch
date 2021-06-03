@@ -1,0 +1,24 @@
+
+.app {
+  background: #243238;
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+  min-height: 100vh;
+}
+
+
+.appHeader {
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  background-color: #2d3f47;
+  font-size: calc(10px + 2vmin);
+  color: white;
+
+}
+
+.head {
+  display: flex;
+  background-color: darkgray;
+}

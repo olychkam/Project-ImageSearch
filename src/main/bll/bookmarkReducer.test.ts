@@ -10,54 +10,39 @@ beforeEach(() => {
         startState = {
             bookmark: [
                 {
-                    bookmarkPhotoId: "13682192405",
+                    bookmarkPhotoId: "45925416992",
                     bookmarkPhoto: {
-                        farm: 4,
-                        id: "13682192405",
+                        farm: 5,
+                        id: "45925416992",
                         isfamily: 0,
                         isfriend: 0,
                         ispublic: 1,
-                        owner: "33399358@N00",
-                        secret: "882c1eecff",
-                        server: "3718",
-                        title: "Car.",
-                        tags: ["afds", "dsdadsfas", "asd", "sadf", "fasd", "f", "safa"]
+                        owner: "73422502@N08",
+                        secret: "c9caac8cb9",
+                        server: "4838",
+                        title: "Cat",
+                        tags: ["aa", "new"]
                     }
                 },
-                {
-                    bookmarkPhotoId: "211",
-                    bookmarkPhoto: {
-                        farm: 3,
-                        id: "211",
-                        isfamily: 0,
-                        isfriend: 0,
-                        ispublic: 1,
-                        owner: "Nick",
-                        secret: "882c3f",
-                        server: "2118",
-                        title: "x3",
-                        tags: ["rweg", "ww", "eer", "ll", "ljj", "f", "safa"]
-                    }
-                }]
+              ]
         }
     }
 )
 
 
 test('photo should be correct deleted', () => {
-    const id = "13682192405"
+    const id = "45925416992"
     const action: ActionsType = deletePhotoFromBookmark(id);
     const endState = bookmarkReducer(startState, action)
     expect(endState.bookmark.length).toBe(1);
-    expect(endState.bookmark[0].bookmarkPhotoId).toBe("211")
 });
 
 test('tag  should be correct added to photo', () => {
-    const id = "13682192405"
-    const tag = "newTagE"
+    const id = "45925416992"
+    const tag = "new"
     const action: ActionsType = addTagToBookmark(id, tag);
     const endState = bookmarkReducer(startState, action)
-    expect(endState.bookmark.length).toBe(2);
-    expect(endState.bookmark[0].bookmarkPhoto.tags).toContain("newTagE")
+    expect(endState.bookmark.length).toBe(1);
+    expect(endState.bookmark[0].bookmarkPhoto.tags).toContain("new")
 });
 

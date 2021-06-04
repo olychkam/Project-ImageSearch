@@ -14,7 +14,7 @@ const useStyles = makeStyles({
     },
     label: {maxWidth: "100%"},
 });
-export default function MyAlert(props: MyAlertPropsType) {
+export default function Search(props: MyAlertPropsType) {
 
     const [open, setOpen] = React.useState(props.isOpen);
 

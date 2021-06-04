@@ -7,9 +7,9 @@ import styles from "./Tags.module.css"
 import {deleteTagFromBookmarkTC} from "../../main/bll/bookmarkReducer";
 
 type TagPropsType = {
-    photoId: string
     tags: Array<string>,
-    isFavorite?: boolean
+    photoId: string
+    bookmark?: boolean
 }
 
 
@@ -19,7 +19,7 @@ export const Tags: React.FC<TagPropsType> = (props) => {
 
     const deleteTagHandler = (tag: string) => () => {
         dispatch(deleteTag(photoId, tag))
-        if (props.isFavorite) {
+        if (props.bookmark) {
             dispatch(deleteTagFromBookmarkTC(photoId, tag))
         }
     }

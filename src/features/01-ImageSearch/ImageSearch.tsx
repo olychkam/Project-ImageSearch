@@ -7,10 +7,22 @@ import Loading from "../06-Loading/Loading";
 import {Paginator} from "../07-Paginator/Paginator";
 import s from "./ImageSearch.module.css"
 import {Button, Grid, TextField} from "@material-ui/core";
-import MyAlert from "../../main/ui/MyAlert/MyAlert";
-import {InitialStateType} from "../../main/bll/bookmarkReducer";
+import Search from "../../main/ui/Search/Search";
+import {isPhotoBookmark} from "../functions/isPhotoBookmark";
+import makeStyles from "@material-ui/core/styles/makeStyles";
 
-
+const useStyles = makeStyles((theme) => ({
+    container: {
+        display: "flex",
+        width: "100%",
+        flexGrow: 1,
+        margin: "auto"
+    },
+    item: {
+        padding: "20px",
+        xs: "12"
+    }
+}));
 
 export default function ImageSearch() {
     const state = useSelector<AppRootStateType, AppRootStateType>(state => state)
@@ -18,49 +30,42 @@ export default function ImageSearch() {
     const dispatch = useDispatch()
     const [title, setTitle] = useState<string>(photos.newName)
     const [error, setError] = useState<string>(state.photos.someError)
+    const styles = useStyles();
     useEffect(() => {
         setError(photos.someError)
     }, [photos.someError])
-
-    const inputHandler = (e: ChangeEvent<HTMLInputElement>) => {
-        setTitle(e.currentTarget.value)
-        setError("")
-    }
-
-    const onKeyPressHandler = (e: React.KeyboardEvent<HTMLInputElement>) => {
-        if (error !== "") setError("")
-        if (e.key === "Enter") searchPhotoHandler()
-    }
 
     const searchPhotoHandler = () => {
         if (title.trim() !== "") {
             dispatch(getPhotos(title, photos.page))
             dispatch(setNewName(title))
         } else {
-            setError("Please, add name to find image")
+            setError("Please, enter a name for the image")
         }
+    }
+    const inputHandler = (e: ChangeEvent<HTMLInputElement>) => {
+        setTitle(e.currentTarget.value)
+        setError("")
+    }
+    const onKeyPressHandler = (e: React.KeyboardEvent<HTMLInputElement>) => {
+        if (error !== "") setError("")
+        if (e.key === "Enter") searchPhotoHandler()
     }
 
     const onPageChanged = (page: number) => {
         dispatch(getPhotos(title, page))
     }
-    const isPhotoBookmark =  (id: string, bookmarkPhotos: InitialStateType)=> {
-        return bookmarkPhotos?.bookmark.some(fP => fP.bookmarkPhotoId === id)
-    }
-
     if (photos.receivingPhotosProgress) {
         return <Loading/>
     }
-debugger
     return <div className={s.imageSearchContainer}>
-
         {
             !photos.receivingPhotosSuccess &&
-            <MyAlert errorMessage={" Empty result of the searsh :( "} isOpen={true}/>
+            <Search errorMessage={" :=( "} isOpen={true}/>
         }
-        <div className={s.container1}>
+        <div className={styles.container}>
             <Grid container>
-                <Grid className={s.item} item xs={8}>
+                <Grid className={styles.item} item xs={8}>
                     <TextField
                         type="text"
                         value={title}
@@ -68,13 +73,13 @@ debugger
                         onKeyPress={onKeyPressHandler}
                         variant="outlined"
                         placeholder={"Print your search"}
-                        error={error !== ""} // convert sting error to boolean
+                        error={error !== ""}
                         helperText={error}
                         fullWidth={true}
                         size={"medium"}
                     />
                 </Grid>
-                <Grid className={s.item} item xs={4}>
+                <Grid className={styles.item} item xs={4}>
                     <Button
                         onClick={searchPhotoHandler}
                         variant="outlined"
@@ -93,7 +98,7 @@ debugger
             {photos.photo.map(ph => <Photo
                     key={ph.id}
                     photo={ph}
-                    isFavorite={isPhotoBookmark(ph.id, favorite)}
+                    bookmark={isPhotoBookmark(ph.id, favorite)}
                 />
             )
             }

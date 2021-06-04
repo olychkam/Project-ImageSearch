@@ -1,5 +1,5 @@
 
-.favoritePageContainer {
+.bookmarkPageContainer {
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -7,7 +7,7 @@
   margin: 10px;
 }
 
-  .photos{
+.photos{
     display: flex;
     flex-direction: row ;
     justify-content:space-around;

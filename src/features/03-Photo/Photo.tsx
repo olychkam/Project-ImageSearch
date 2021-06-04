@@ -8,7 +8,7 @@ import {addPhotoToBookmark, addTagToBookmarkTC, removeBookmarkPhoto} from "../..
 
 type PhotoPropsType = {
     photo: PhotoStoreType
-    isFavorite?: boolean
+    bookmark?: boolean
 }
 export const Photo: FC<PhotoPropsType> = React.memo((props) => {
     const {farm, tags, id, secret, server} = props.photo
@@ -33,17 +33,17 @@ export const Photo: FC<PhotoPropsType> = React.memo((props) => {
     const addTagHandler = () => {
         if (tagInput.trim() !== "") {
             dispatch(addTag(id, tagInput))
-            if (props.isFavorite) {
+            if (props.bookmark) {
                 dispatch(addTagToBookmarkTC(id, tagInput))
             }
             setTagInput("")
         } else {
-            setError("Please, add tag")
+            setError("Please, add tag.")
         }
     }
 
     const OnClickHandler = () => {
-        if (props.isFavorite) {
+        if (props.bookmark) {
             dispatch(removeBookmarkPhoto(id))
         } else {
             dispatch(addPhotoToBookmark(id, props.photo))
@@ -51,7 +51,7 @@ export const Photo: FC<PhotoPropsType> = React.memo((props) => {
     }
 
     const imgSrc = `https://farm${farm}.staticflickr.com/${server}/${id}_${secret}.jpg)`
-
+debugger
     return (
         <div className={s.photoContainer}>
             <img className={s.photoImage} src={imgSrc} alt="img is loading :)"/>
@@ -61,12 +61,12 @@ export const Photo: FC<PhotoPropsType> = React.memo((props) => {
                     variant="outlined"
                     color="primary"
                 >
-                    {props.isFavorite ? "Remove  It!" : "02-Bookmark  it!"}</Button>
+                    {props.bookmark ? "Remove!" : "Bookmark!"}</Button>
             </div>
             <Tags
                 tags={tags}
                 photoId={id}
-                isFavorite={props.isFavorite}
+                bookmark={props.bookmark}
             />
             <TextField className={s.button}
                        type="text"

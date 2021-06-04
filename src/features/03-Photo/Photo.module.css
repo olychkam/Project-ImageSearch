@@ -1,12 +1,13 @@
 
-.photoContainer{
-  width: 270px ;
+.photoContainer {
+  width: 270px;
   padding: 10px;
   margin: 20px 10px 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
   background-color: #e0a9e0;
+}
   .photoImage{
     max-width: 240px;
     object-fit: cover;
@@ -18,4 +19,4 @@
     padding-top: 10px;
     padding-bottom: 10px;
   }
-}
+
